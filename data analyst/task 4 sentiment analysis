@@ -1,0 +1,31 @@
+import pandas as pd
+from textblob import TextBlob
+
+reviews = [
+    "This product is amazing and very useful.",
+    "Excellent quality and fast delivery.",
+    "The item is okay.",
+    "Not bad but could be better.",
+    "Worst product I have ever purchased.",
+    "Very disappointed with the service."
+]
+
+df = pd.DataFrame(reviews, columns=["Review"])
+
+def analyze_sentiment(text):
+    polarity = TextBlob(text).sentiment.polarity
+
+    if polarity > 0:
+        return "Positive"
+    elif polarity < 0:
+        return "Negative"
+    else:
+        return "Neutral"
+
+df["Sentiment"] = df["Review"].apply(analyze_sentiment)
+
+print(df)
+
+df.to_csv("sentiment_results.csv", index=False)
+
+print("Sentiment analysis completed!")

@@ -1,0 +1,55 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = pd.read_csv(
+    "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv"
+)
+
+# Bar Chart
+plt.figure(figsize=(6,4))
+sns.barplot(
+    x="day",
+    y="total_bill",
+    data=df
+)
+
+plt.title("Average Bill by Day")
+plt.savefig("bar_chart.png")
+plt.show()
+
+# Pie Chart
+df["day"].value_counts().plot(
+    kind="pie",
+    autopct="%1.1f%%"
+)
+
+plt.title("Visits by Day")
+plt.ylabel("")
+plt.savefig("pie_chart.png")
+plt.show()
+
+# Scatter Plot
+plt.figure(figsize=(6,4))
+sns.scatterplot(
+    x="total_bill",
+    y="tip",
+    hue="sex",
+    data=df
+)
+
+plt.title("Bill vs Tip")
+plt.savefig("scatter_plot.png")
+plt.show()
+
+# Box Plot
+plt.figure(figsize=(6,4))
+sns.boxplot(
+    x="day",
+    y="total_bill",
+    data=df
+)
+
+plt.title("Bill Distribution")
+plt.savefig("box_plot.png")
+plt.show()
